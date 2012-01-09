@@ -1,0 +1,732 @@
+<html>
+	<head>
+		<title>AVR Assembler test</title>
+		<script type="text/javascript" language="JavaScript" src="avrasm.js"></script>
+		<script type="text/javascript" language="JavaScript" src="jsdiff.js"></script>
+		<script type="text/javascript" language="JavaScript">
+function doassemble() {
+	document.getElementById('RET').innerHTML = "";
+	document.getElementById('output').innerHTML = "";
+
+	var ip = document.getElementById('full-test').innerHTML;
+	var ret = assemble(ip, {'outmode':'list'});
+	if( "errors" in ret ) {
+		document.getElementById('RET').innerHTML = "FAILED";
+		document.getElementById('output').innerHTML = ret.errors.join("\n");
+	} else {
+
+		var expected = document.getElementById('expected-results').innerHTML;
+		var result = diffString(expected, ret.data);
+		if( result.match(/(<del>|<ins>)/) ) {
+			document.getElementById('output').innerHTML = result;
+			document.getElementById('RET').innerHTML = "FAILED";
+		} else {
+			document.getElementById('RET').innerHTML = "PASSED";
+		}
+
+	}
+
+}
+		</script>
+		<style>
+		del { background: red; }
+		ins { background: lightgreen; }
+		</style>
+	</head>
+	<body>
+		<p>
+		This assembles a list of every Mnemonic and a handful of parameters on each.  Then compairs
+		the result to a known to be correct output for the same assembly.
+		</p><p>
+		This isn't currently a complete list.
+		</p>
+		<p><a href="#" onclick="javascript:doassemble()">Run Test</a></p>
+		<div id="RET"></div>
+		<pre id="output"></pre>
+
+		<pre id='full-test' style="visibility:hidden">
+	ADD	r0,r1
+	ADD	r15,r28
+	ADD	r28,r31
+
+	ADC	r0,r1
+	ADC	r15,r28
+	ADC	r28,r31
+
+	ADIW	r24, 10
+	ADIW	r26,44
+	ADIW	r28,2
+	ADIW	r30, 63
+
+	AND	r0,r1
+	AND	r15,r28
+	AND	r28,r31
+
+	ANDI	r16, 155
+	ANDI	r25, 1
+	ANDI	r31, 0xff
+
+	ASR	r0
+	ASR	r15
+	ASR	r31
+
+	BCLR	0
+	BCLR	4
+	BCLR	7
+
+	BLD	r0, 7
+	BLD	r16, 4
+	BLD	r31, 0
+
+#	BRBC	0, -64
+#	BRBC	4, 1
+#	BRBC	7, 63
+#
+#	BRBS	0, -64
+#	BRBS	4, 1
+#	BRBS	7, 63
+#
+#	BRCC	-64
+#	BRCC	-1
+#	BRCC	63
+#
+#	BRCS	-64
+#	BRCS	-1
+#	BRCS	63
+
+	BREAK
+
+#	BREQ	-64
+#	BREQ	1
+#	BREQ	63
+#
+#	BRGE	-64
+#	BRGE	1
+#	BRGE	63
+#
+#	BRHC	-64
+#	BRHC	1
+#	BRHC	63
+#
+#	BRHS	-64
+#	BRHS	1
+#	BRHS	63
+#
+#	BRID	-64
+#	BRID	1
+#	BRID	63
+#
+#	BRIE	-64
+#	BRIE	1
+#	BRIE	63
+#
+#	BRLO	-64
+#	BRLO	1
+#	BRLO	63
+#
+#	BRLT	-64
+#	BRLT	1
+#	BRLT	63
+#
+#	BRMI	-64
+#	BRMI	1
+#	BRMI	63
+#
+#	BRNE	-64
+#	BRNE	1
+#	BRNE	63
+#
+#	BRPL	-64
+#	BRPL	1
+#	BRPL	63
+#
+#	BRSH	-64
+#	BRSH	1
+#	BRSH	63
+#
+#	BRTC	-64
+#	BRTC	1
+#	BRTC	63
+#
+#	BRTS	-64
+#	BRTS	1
+#	BRTS	63
+#
+#	BRVC	-64
+#	BRVC	1
+#	BRVC	63
+#
+#	BRVS	-64
+#	BRVS	1
+#	BRVS	63
+
+	BSET	0
+	BSET	4
+	BSET	7
+
+	BST	r0,7
+	BST	r15,4
+	BST	r31, 0
+
+#	CALL	0
+#	CALL	0x1FFFFF
+#	CALL	0x3FFFFF
+
+	CBI	31,0
+	CBI	14,3
+	CBI	0,7
+
+#	CRB	r16, 255
+#	CRB	r21, 0xaa
+#	CRB	r31, 0
+
+	CLC
+	CLH
+	CLI
+	CLN
+
+	CLR	r0
+	CLR	r16
+	CLR	r31
+
+	CLS
+	CLT
+	CLV
+	CLZ
+
+	COM	r0
+	COM	r15
+	COM	r31
+
+	CP	r0, r31
+	CP	r15,r16
+	CP	r31,r0
+
+	CPC	r0,r31
+	CPC	r15, r16
+	CPC	r31, r0
+
+	CPI	r16, 0xff
+	CPI	r23, 0x55
+	CPI	r31, 0
+
+	CPSE	r0,r31
+	CPSE	r15, r16
+	CPSE	r31,r0
+
+	DEC	r0
+	DEC	r16
+	DEC	r31
+
+	DES	0
+	DES	7
+	DES	15
+
+	EICALL
+	EIJMP
+
+	ELPM
+	ELPM	r0, Z
+	ELPM	r31, Z+
+
+	EOR	r0, r31
+	EOR	r16, r15
+	EOR	r31,r0
+
+	FMUL	r16,r23
+	FMUL	r17,r19
+	FMUL	r23,r16
+
+	FMULS	r16,r23
+	FMULS	r17,r19
+	FMULS	r23,r16
+
+	FMULSU	r16,r23
+	FMULSU	r17,r19
+	FMULSU	r23,r16
+
+	ICALL
+	IJMP
+
+	IN	r0,63
+	IN	r16,32
+	IN	r31,0
+
+	INC	r0
+	INC	r15
+	INC	r31
+
+#	JMP	0
+#	JMP	0x1FFFFF
+#	JMP	0x3FFFFF
+
+#	LAC	Z,r0
+#	LAC	Z, r16
+#	LAC	Z, r31
+#
+#	LAS	Z,r0
+#	LAS	Z, r16
+#	LAS	Z, r31
+#
+#	LAT	Z,r0
+#	LAT	Z, r16
+#	LAT	Z, r31
+
+	LD	R0,X
+	LD	R15,X+
+	LD	R31,-X
+
+	LD	r0, Y
+	LD	r16, Y+
+	LD	r31, -Y
+
+	LD	r0, Z
+	LD	r15, Z+
+	LD	r31, -Z
+
+	LDD	R0, Y+63
+	LDD	r31, Y+0
+
+	LDD	R0, Z+63
+	LDD	r31, Z+0
+
+	LDI	r16,0xff
+	LDI	r23,0xaa
+	LDI	r31,0
+
+	LDS	r0,65535
+	LDS	r16,32767
+	LDS	r31,0
+
+	LDS	r16,127
+	LDS	r23,64
+	LDS	r31, 0
+
+	LPM
+	LPM	R0,Z
+	LPM	R31,Z+
+
+	LSL	R0
+	LSL	R15
+	LSL	R31
+
+	LSR	r0
+	LSR	r16
+	LSR	r31
+
+	MOV	r0,r31
+	MOV	r15,R16
+	MOV	r31,R0
+
+	MOVW	r0,r30
+	MOVW	r14,R16
+	MOVW	r30,r0
+
+	MUL	r0,r31
+	MUL	r15,r16
+	MUL	r31,r0
+
+	MULS	r16,r31
+	MULS	r21,r26
+	MULS	r31,r16
+
+	MULSU	r16,r23
+	MULSU	r18,r20
+	MULSU	r23,r16
+
+	NEG	r0
+	NEG	r16
+	NEG	r31
+
+	NOP
+
+	OR	r0,r31
+	OR	r16,r15
+	OR	r31,r0
+
+	ORI	r16,255
+	ORI	r23,64
+	ORI	r31,0
+
+	OUT	63,r0
+	OUT	32,r16
+	OUT	0,r31
+
+	POP	r0
+	POP	r16
+	POP	r31
+
+	PUSH	r0
+	PUSH	r15
+	PUSH	r31
+
+#	RCALL	-2048
+#	RCALL	0
+#	RCALL	2048
+
+	RET
+	RETI
+
+#	RJMP	-2048
+#	RJMP	0
+#	RJMP	2048
+
+	ROL	r0
+	ROL	r15
+	ROL	r31
+
+	ROR	r0
+	ROR	r16
+	ROR	r31
+
+	SBC	r0,r31
+	SBC	r15,r16
+	SBC	r31,r0
+
+	SBCI	r16,255
+	SBCI	r23,63
+	SBCI	r31,0
+
+	SBI	0, 7
+	SBI	16, 4
+	SBI	31, 0
+
+	SBIC	0, 7
+	SBIC	15, 4
+	SBIC	31, 0
+
+	SBIS	0, 7
+	SBIS	15, 4
+	SBIS	31, 0
+
+	SBIW	r24,63
+	SBIW	r26,45
+	SBIW	r28,25
+	SBIW	r30,0
+
+	SBR	r16, 255
+	SBR	r23, 64
+	SBR	r31, 0
+
+	SBRC	r0, 7
+	SBRC	r15, 4
+	SBRC	r31, 0
+
+	SBRS	r0, 7
+	SBRS	r15, 4
+	SBRS	r31, 0
+
+	SEC
+	SEH
+	SEI
+	SEN
+
+	SER	r16
+	SER	r23
+	SER	r31
+
+	SES
+	SET
+	SEV
+	SEZ
+	SLEEP
+
+	SPM
+	SPM	Z+
+
+	ST	X, r0
+	ST	X+, r15
+	ST	-X, r31
+
+	ST	Y, r0
+	ST	Y+, r15
+	ST	-Y, r31
+
+	ST	Z, R0
+	ST	Z+, R15
+	ST	-Z, R31
+
+	STD	Y+0, R31
+	STD	Y+63, r0
+
+	STD	Z+0, R31
+	STD	Z+63, r0
+
+	STS	0, r31
+	STS	32767, r15
+	STS	65535, r0
+
+	STS	0, r31
+	STS	63, r23
+	STS	127, r16
+
+	SUB	r0, r31
+	SUB	r15, r16
+	SUB	r31, r0
+
+	SUBI	r16, 255
+	SUBI	r23, 127
+	SUBI	r31, 0
+
+	SWAP	r0
+	SWAP	r15
+	SWAP	r31
+
+	TST	r0
+	TST	r15
+	TST	r31
+
+	WDR
+
+#	XCH	Z, r0
+#	XCH	Z, r16
+#	XCH	Z, r31
+#
+# vim: set noet ai cin sw=8 ts=8 :
+
+		</pre>
+		<pre id='expected-results' style="visibility:hidden">
+   1 0000 010C      	ADD r0,r1
+   2 0002 FC0E      	ADD r15,r28
+   3 0004 CF0F      	ADD r28,r31
+   5 0006 011C      	ADC r0,r1
+   6 0008 FC1E      	ADC r15,r28
+   7 000a CF1F      	ADC r28,r31
+   9 000c 0A96      	ADIW r24,10
+  10 000e 9C96      	ADIW r26,44
+  11 0010 2296      	ADIW r28,2
+  12 0012 FF96      	ADIW r30,63
+  14 0014 0120      	AND r0,r1
+  15 0016 FC22      	AND r15,r28
+  16 0018 CF23      	AND r28,r31
+  18 001a 0B79      	ANDI r16,155
+  19 001c 9170      	ANDI r25,1
+  20 001e FF7F      	ANDI r31,0xff
+  22 0020 0594      	ASR r0
+  23 0022 F594      	ASR r15
+  24 0024 F595      	ASR r31
+  26 0026 8894      	BCLR 0
+  27 0028 C894      	BCLR 4
+  28 002a F894      	BCLR 7
+  30 002c 07F8      	BLD r0,7
+  31 002e 04F9      	BLD r16,4
+  32 0030 F0F9      	BLD r31,0
+  50 0032 9895      	BREAK
+ 116 0034 0894      	BSET 0
+ 117 0036 4894      	BSET 4
+ 118 0038 7894      	BSET 7
+ 120 003a 07FA      	BST r0,7
+ 121 003c F4FA      	BST r15,4
+ 122 003e F0FB      	BST r31,0
+ 128 0040 F898      	CBI 31,0
+ 129 0042 7398      	CBI 14,3
+ 130 0044 0798      	CBI 0,7
+ 136 0046 8894      	CLC
+ 137 0048 D894      	CLH
+ 138 004a F894      	CLI
+ 139 004c A894      	CLN
+ 141 004e 0024      	CLR r0
+ 142 0050 0027      	CLR r16
+ 143 0052 FF27      	CLR r31
+ 145 0054 C894      	CLS
+ 146 0056 E894      	CLT
+ 147 0058 B894      	CLV
+ 148 005a 9894      	CLZ
+ 150 005c 0094      	COM r0
+ 151 005e F094      	COM r15
+ 152 0060 F095      	COM r31
+ 154 0062 0F16      	CP r0,r31
+ 155 0064 F016      	CP r15,r16
+ 156 0066 F015      	CP r31,r0
+ 158 0068 0F06      	CPC r0,r31
+ 159 006a F006      	CPC r15,r16
+ 160 006c F005      	CPC r31,r0
+ 162 006e 0F3F      	CPI r16,0xff
+ 163 0070 7535      	CPI r23,0x55
+ 164 0072 F030      	CPI r31,0
+ 166 0074 0F12      	CPSE r0,r31
+ 167 0076 F012      	CPSE r15,r16
+ 168 0078 F011      	CPSE r31,r0
+ 170 007a 0A94      	DEC r0
+ 171 007c 0A95      	DEC r16
+ 172 007e FA95      	DEC r31
+ 174 0080 0B94      	DES 0
+ 175 0082 7B94      	DES 7
+ 176 0084 FB94      	DES 15
+ 178 0086 1995      	EICALL
+ 179 0088 1994      	EIJMP
+ 181 008a D895      	ELPM
+ 182 008c 0690      	ELPM r0,Z
+ 183 008e F791      	ELPM r31,Z+
+ 185 0090 0F26      	EOR r0,r31
+ 186 0092 0F25      	EOR r16,r15
+ 187 0094 F025      	EOR r31,r0
+ 189 0096 0F03      	FMUL r16,r23
+ 190 0098 1B03      	FMUL r17,r19
+ 191 009a 7803      	FMUL r23,r16
+ 193 009c 8703      	FMULS r16,r23
+ 194 009e 9303      	FMULS r17,r19
+ 195 00a0 F003      	FMULS r23,r16
+ 197 00a2 8F03      	FMULSU r16,r23
+ 198 00a4 9B03      	FMULSU r17,r19
+ 199 00a6 F803      	FMULSU r23,r16
+ 201 00a8 0995      	ICALL
+ 202 00aa 0994      	IJMP
+ 204 00ac 0FB6      	IN r0,63
+ 205 00ae 00B5      	IN r16,32
+ 206 00b0 F0B1      	IN r31,0
+ 208 00b2 0394      	INC r0
+ 209 00b4 F394      	INC r15
+ 210 00b6 F395      	INC r31
+ 228 00b8 0C90      	LD R0,X
+ 229 00ba FD90      	LD R15,X+
+ 230 00bc FE91      	LD R31,-X
+ 232 00be 0880      	LD r0,Y
+ 233 00c0 0991      	LD r16,Y+
+ 234 00c2 FA91      	LD r31,-Y
+ 236 00c4 0080      	LD r0,Z
+ 237 00c6 F190      	LD r15,Z+
+ 238 00c8 F291      	LD r31,-Z
+ 240 00ca 0FAC      	LDD R0,Y+63
+ 241 00cc F881      	LDD r31,Y+0
+ 243 00ce 07AC      	LDD R0,Z+63
+ 244 00d0 F081      	LDD r31,Z+0
+ 246 00d2 0FEF      	LDI r16,0xff
+ 247 00d4 7AEA      	LDI r23,0xaa
+ 248 00d6 F0E0      	LDI r31,0
+ 250 00d8 0090 FFFF 	LDS r0,65535
+ 251 00dc 0091 FF7F 	LDS r16,32767
+ 252 00e0 F091 0000 	LDS r31,0
+ 254 00e4 0091 7F00 	LDS r16,127
+ 255 00e8 7091 4000 	LDS r23,64
+ 256 00ec F091 0000 	LDS r31,0
+ 258 00f0 C895      	LPM
+ 259 00f2 0490      	LPM R0,Z
+ 260 00f4 F591      	LPM R31,Z+
+ 262 00f6 000C      	LSL R0
+ 263 00f8 FF0C      	LSL R15
+ 264 00fa FF0F      	LSL R31
+ 266 00fc 0694      	LSR r0
+ 267 00fe 0695      	LSR r16
+ 268 0100 F695      	LSR r31
+ 270 0102 0F2E      	MOV r0,r31
+ 271 0104 F02E      	MOV r15,R16
+ 272 0106 F02D      	MOV r31,R0
+ 274 0108 0F01      	MOVW r0,r30
+ 275 010a 7801      	MOVW r14,R16
+ 276 010c F001      	MOVW r30,r0
+ 278 010e 0F9E      	MUL r0,r31
+ 279 0110 F09E      	MUL r15,r16
+ 280 0112 F09D      	MUL r31,r0
+ 282 0114 0F02      	MULS r16,r31
+ 283 0116 5A02      	MULS r21,r26
+ 284 0118 F002      	MULS r31,r16
+ 286 011a 0703      	MULSU r16,r23
+ 287 011c 2403      	MULSU r18,r20
+ 288 011e 7003      	MULSU r23,r16
+ 290 0120 0194      	NEG r0
+ 291 0122 0195      	NEG r16
+ 292 0124 F195      	NEG r31
+ 294 0126 0000      	NOP
+ 296 0128 0F2A      	OR r0,r31
+ 297 012a 0F29      	OR r16,r15
+ 298 012c F029      	OR r31,r0
+ 300 012e 0F6F      	ORI r16,255
+ 301 0130 7064      	ORI r23,64
+ 302 0132 F060      	ORI r31,0
+ 304 0134 0FBE      	OUT 63,r0
+ 305 0136 00BD      	OUT 32,r16
+ 306 0138 F0B9      	OUT 0,r31
+ 308 013a 0F90      	POP r0
+ 309 013c 0F91      	POP r16
+ 310 013e FF91      	POP r31
+ 312 0140 0F92      	PUSH r0
+ 313 0142 FF92      	PUSH r15
+ 314 0144 FF93      	PUSH r31
+ 320 0146 0895      	RET
+ 321 0148 1895      	RETI
+ 327 014a 001C      	ROL r0
+ 328 014c FF1C      	ROL r15
+ 329 014e FF1F      	ROL r31
+ 331 0150 0794      	ROR r0
+ 332 0152 0795      	ROR r16
+ 333 0154 F795      	ROR r31
+ 335 0156 0F0A      	SBC r0,r31
+ 336 0158 F00A      	SBC r15,r16
+ 337 015a F009      	SBC r31,r0
+ 339 015c 0F4F      	SBCI r16,255
+ 340 015e 7F43      	SBCI r23,63
+ 341 0160 F040      	SBCI r31,0
+ 343 0162 079A      	SBI 0,7
+ 344 0164 849A      	SBI 16,4
+ 345 0166 F89A      	SBI 31,0
+ 347 0168 0799      	SBIC 0,7
+ 348 016a 7C99      	SBIC 15,4
+ 349 016c F899      	SBIC 31,0
+ 351 016e 079B      	SBIS 0,7
+ 352 0170 7C9B      	SBIS 15,4
+ 353 0172 F89B      	SBIS 31,0
+ 355 0174 CF97      	SBIW r24,63
+ 356 0176 9D97      	SBIW r26,45
+ 357 0178 6997      	SBIW r28,25
+ 358 017a 3097      	SBIW r30,0
+ 360 017c 0F6F      	SBR r16,255
+ 361 017e 7064      	SBR r23,64
+ 362 0180 F060      	SBR r31,0
+ 364 0182 07FC      	SBRC r0,7
+ 365 0184 F4FC      	SBRC r15,4
+ 366 0186 F0FD      	SBRC r31,0
+ 368 0188 07FE      	SBRS r0,7
+ 369 018a F4FE      	SBRS r15,4
+ 370 018c F0FF      	SBRS r31,0
+ 372 018e 0894      	SEC
+ 373 0190 5894      	SEH
+ 374 0192 7894      	SEI
+ 375 0194 2894      	SEN
+ 377 0196 0FEF      	SER r16
+ 378 0198 7FEF      	SER r23
+ 379 019a FFEF      	SER r31
+ 381 019c 4894      	SES
+ 382 019e 6894      	SET
+ 383 01a0 3894      	SEV
+ 384 01a2 1894      	SEZ
+ 385 01a4 8895      	SLEEP
+ 387 01a6 E895      	SPM
+ 388 01a8 F895      	SPM Z+
+ 390 01aa 0C92      	ST X,r0
+ 391 01ac FD92      	ST X+,r15
+ 392 01ae FE93      	ST -X,r31
+ 394 01b0 0882      	ST Y,r0
+ 395 01b2 F992      	ST Y+,r15
+ 396 01b4 FA93      	ST -Y,r31
+ 398 01b6 0082      	ST Z,R0
+ 399 01b8 F192      	ST Z+,R15
+ 400 01ba F293      	ST -Z,R31
+ 402 01bc F883      	STD Y+0,R31
+ 403 01be 0FAE      	STD Y+63,r0
+ 405 01c0 F083      	STD Z+0,R31
+ 406 01c2 07AE      	STD Z+63,r0
+ 408 01c4 F093 0000 	STS 0,r31
+ 409 01c8 F092 FF7F 	STS 32767,r15
+ 410 01cc 0092 FFFF 	STS 65535,r0
+ 412 01d0 F093 0000 	STS 0,r31
+ 413 01d4 7093 3F00 	STS 63,r23
+ 414 01d8 0093 7F00 	STS 127,r16
+ 416 01dc 0F1A      	SUB r0,r31
+ 417 01de F01A      	SUB r15,r16
+ 418 01e0 F019      	SUB r31,r0
+ 420 01e2 0F5F      	SUBI r16,255
+ 421 01e4 7F57      	SUBI r23,127
+ 422 01e6 F050      	SUBI r31,0
+ 424 01e8 0294      	SWAP r0
+ 425 01ea F294      	SWAP r15
+ 426 01ec F295      	SWAP r31
+ 428 01ee 0020      	TST r0
+ 429 01f0 FF20      	TST r15
+ 430 01f2 FF23      	TST r31
+ 432 01f4 A895      	WDR
+		</pre>
+	</body>
+</html>
+
+

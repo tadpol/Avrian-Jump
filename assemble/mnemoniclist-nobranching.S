@@ -1,0 +1,439 @@
+	ADD	r0,r1
+	ADD	r15,r28
+	ADD	r28,r31
+
+	ADC	r0,r1
+	ADC	r15,r28
+	ADC	r28,r31
+
+	ADIW	r24, 10
+	ADIW	r26,44
+	ADIW	r28,2
+	ADIW	r30, 63
+
+	AND	r0,r1
+	AND	r15,r28
+	AND	r28,r31
+
+	ANDI	r16, 155
+	ANDI	r25, 1
+	ANDI	r31, 0xff
+
+	ASR	r0
+	ASR	r15
+	ASR	r31
+
+	BCLR	0
+	BCLR	4
+	BCLR	7
+
+	BLD	r0, 7
+	BLD	r16, 4
+	BLD	r31, 0
+
+#	BRBC	0, -64
+#	BRBC	4, 1
+#	BRBC	7, 63
+#
+#	BRBS	0, -64
+#	BRBS	4, 1
+#	BRBS	7, 63
+#
+#	BRCC	-64
+#	BRCC	-1
+#	BRCC	63
+#
+#	BRCS	-64
+#	BRCS	-1
+#	BRCS	63
+
+	BREAK
+
+#	BREQ	-64
+#	BREQ	1
+#	BREQ	63
+#
+#	BRGE	-64
+#	BRGE	1
+#	BRGE	63
+#
+#	BRHC	-64
+#	BRHC	1
+#	BRHC	63
+#
+#	BRHS	-64
+#	BRHS	1
+#	BRHS	63
+#
+#	BRID	-64
+#	BRID	1
+#	BRID	63
+#
+#	BRIE	-64
+#	BRIE	1
+#	BRIE	63
+#
+#	BRLO	-64
+#	BRLO	1
+#	BRLO	63
+#
+#	BRLT	-64
+#	BRLT	1
+#	BRLT	63
+#
+#	BRMI	-64
+#	BRMI	1
+#	BRMI	63
+#
+#	BRNE	-64
+#	BRNE	1
+#	BRNE	63
+#
+#	BRPL	-64
+#	BRPL	1
+#	BRPL	63
+#
+#	BRSH	-64
+#	BRSH	1
+#	BRSH	63
+#
+#	BRTC	-64
+#	BRTC	1
+#	BRTC	63
+#
+#	BRTS	-64
+#	BRTS	1
+#	BRTS	63
+#
+#	BRVC	-64
+#	BRVC	1
+#	BRVC	63
+#
+#	BRVS	-64
+#	BRVS	1
+#	BRVS	63
+
+	BSET	0
+	BSET	4
+	BSET	7
+
+	BST	r0,7
+	BST	r15,4
+	BST	r31, 0
+
+#	CALL	0
+#	CALL	0x1FFFFF
+#	CALL	0x3FFFFF
+
+	CBI	31,0
+	CBI	14,3
+	CBI	0,7
+
+#	CRB	r16, 255
+#	CRB	r21, 0xaa
+#	CRB	r31, 0
+
+	CLC
+	CLH
+	CLI
+	CLN
+
+	CLR	r0
+	CLR	r16
+	CLR	r31
+
+	CLS
+	CLT
+	CLV
+	CLZ
+
+	COM	r0
+	COM	r15
+	COM	r31
+
+	CP	r0, r31
+	CP	r15,r16
+	CP	r31,r0
+
+	CPC	r0,r31
+	CPC	r15, r16
+	CPC	r31, r0
+
+	CPI	r16, 0xff
+	CPI	r23, 0x55
+	CPI	r31, 0
+
+	CPSE	r0,r31
+	CPSE	r15, r16
+	CPSE	r31,r0
+
+	DEC	r0
+	DEC	r16
+	DEC	r31
+
+	DES	0
+	DES	7
+	DES	15
+
+	EICALL
+	EIJMP
+
+	ELPM
+	ELPM	r0, Z
+	ELPM	r31, Z+
+
+	EOR	r0, r31
+	EOR	r16, r15
+	EOR	r31,r0
+
+	FMUL	r16,r23
+	FMUL	r17,r19
+	FMUL	r23,r16
+
+	FMULS	r16,r23
+	FMULS	r17,r19
+	FMULS	r23,r16
+
+	FMULSU	r16,r23
+	FMULSU	r17,r19
+	FMULSU	r23,r16
+
+	ICALL
+	IJMP
+
+	IN	r0,63
+	IN	r16,32
+	IN	r31,0
+
+	INC	r0
+	INC	r15
+	INC	r31
+
+#	JMP	0
+#	JMP	0x1FFFFF
+#	JMP	0x3FFFFF
+
+#	LAC	Z,r0
+#	LAC	Z, r16
+#	LAC	Z, r31
+#
+#	LAS	Z,r0
+#	LAS	Z, r16
+#	LAS	Z, r31
+#
+#	LAT	Z,r0
+#	LAT	Z, r16
+#	LAT	Z, r31
+
+	LD	R0,X
+	LD	R15,X+
+	LD	R31,-X
+
+	LD	r0, Y
+	LD	r16, Y+
+	LD	r31, -Y
+
+	LD	r0, Z
+	LD	r15, Z+
+	LD	r31, -Z
+
+	LDD	R0, Y+63
+	LDD	r31, Y+0
+
+	LDD	R0, Z+63
+	LDD	r31, Z+0
+
+	LDI	r16,0xff
+	LDI	r23,0xaa
+	LDI	r31,0
+
+	LDS	r0,65535
+	LDS	r16,32767
+	LDS	r31,0
+
+	LDS	r16,127
+	LDS	r23,64
+	LDS	r31, 0
+
+	LPM
+	LPM	R0,Z
+	LPM	R31,Z+
+
+	LSL	R0
+	LSL	R15
+	LSL	R31
+
+	LSR	r0
+	LSR	r16
+	LSR	r31
+
+	MOV	r0,r31
+	MOV	r15,R16
+	MOV	r31,R0
+
+	MOVW	r0,r30
+	MOVW	r14,R16
+	MOVW	r30,r0
+
+	MUL	r0,r31
+	MUL	r15,r16
+	MUL	r31,r0
+
+	MULS	r16,r31
+	MULS	r21,r26
+	MULS	r31,r16
+
+	MULSU	r16,r23
+	MULSU	r18,r20
+	MULSU	r23,r16
+
+	NEG	r0
+	NEG	r16
+	NEG	r31
+
+	NOP
+
+	OR	r0,r31
+	OR	r16,r15
+	OR	r31,r0
+
+	ORI	r16,255
+	ORI	r23,64
+	ORI	r31,0
+
+	OUT	63,r0
+	OUT	32,r16
+	OUT	0,r31
+
+	POP	r0
+	POP	r16
+	POP	r31
+
+	PUSH	r0
+	PUSH	r15
+	PUSH	r31
+
+#	RCALL	-2048
+#	RCALL	0
+#	RCALL	2048
+
+	RET
+	RETI
+
+#	RJMP	-2048
+#	RJMP	0
+#	RJMP	2048
+
+	ROL	r0
+	ROL	r15
+	ROL	r31
+
+	ROR	r0
+	ROR	r16
+	ROR	r31
+
+	SBC	r0,r31
+	SBC	r15,r16
+	SBC	r31,r0
+
+	SBCI	r16,255
+	SBCI	r23,63
+	SBCI	r31,0
+
+	SBI	0, 7
+	SBI	16, 4
+	SBI	31, 0
+
+	SBIC	0, 7
+	SBIC	15, 4
+	SBIC	31, 0
+
+	SBIS	0, 7
+	SBIS	15, 4
+	SBIS	31, 0
+
+	SBIW	r24,63
+	SBIW	r26,45
+	SBIW	r28,25
+	SBIW	r30,0
+
+	SBR	r16, 255
+	SBR	r23, 64
+	SBR	r31, 0
+
+	SBRC	r0, 7
+	SBRC	r15, 4
+	SBRC	r31, 0
+
+	SBRS	r0, 7
+	SBRS	r15, 4
+	SBRS	r31, 0
+
+	SEC
+	SEH
+	SEI
+	SEN
+
+	SER	r16
+	SER	r23
+	SER	r31
+
+	SES
+	SET
+	SEV
+	SEZ
+	SLEEP
+
+	SPM
+	SPM	Z+
+
+	ST	X, r0
+	ST	X+, r15
+	ST	-X, r31
+
+	ST	Y, r0
+	ST	Y+, r15
+	ST	-Y, r31
+
+	ST	Z, R0
+	ST	Z+, R15
+	ST	-Z, R31
+
+	STD	Y+0, R31
+	STD	Y+63, r0
+
+	STD	Z+0, R31
+	STD	Z+63, r0
+
+	STS	0, r31
+	STS	32767, r15
+	STS	65535, r0
+
+	STS	0, r31
+	STS	63, r23
+	STS	127, r16
+
+	SUB	r0, r31
+	SUB	r15, r16
+	SUB	r31, r0
+
+	SUBI	r16, 255
+	SUBI	r23, 127
+	SUBI	r31, 0
+
+	SWAP	r0
+	SWAP	r15
+	SWAP	r31
+
+	TST	r0
+	TST	r15
+	TST	r31
+
+	WDR
+
+#	XCH	Z, r0
+#	XCH	Z, r16
+#	XCH	Z, r31
+#
+# vim: set noet ai cin sw=8 ts=8 :
+
