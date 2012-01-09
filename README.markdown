@@ -6,8 +6,8 @@ A very simple ladder language for programming ATMega168s from a web browser.
 
 This started out as a desire to be able to program an Arduino from an iOS device.  Since it
 doesn't seem like compiler tools of any sort would get into the app store, I figured something
-would need to be done in HTML5.  I figured if a [PC emulator][psemu] could be written in
-javascript, so could something like this.
+would need to be done in HTML5.  And if a [PC emulator][psemu] could be written in javascript,
+so could something like this.
 
 However, recreating the Arduino IDE in HTML seemed like too much work. So the project was
 reduced into something much simpler.  Mainly, a simple ladder language, and the Audioino
@@ -21,7 +21,7 @@ Each rung on the ladder has a single test and multiple actions.  Tests can check
 pins, analog pins, and a couple of variables.  Each action and set a digital pin, a PWM output,
 or a variable.  Analog, PWM, and variables are 16bit values.
 
-There is no 'setup()'.  Analog pins are alway sanalog inputs.  When specified in a test, a
+There is no 'setup()'.  Analog pins are always analog inputs.  When specified in a test, a
 digital pin is set to an input then read.  When specified in an action, it is set to an output
 then set.  ??? how does this interact with PWM ???
 
@@ -51,6 +51,24 @@ the known mnemonics into the output.  Even if your target device has no idea wha
 them.
 
 
+Outputs
+-------
+
+A ladder can be turned into an ASCII form, assembler, a S19 file and an played as a WAV.  The
+WAV file is formatted to be something the [Audioino][] bootloader recognises.  The S19 can be
+feed into avrdude.  The assembly is mostly for debugging.  The ASCII format is for easy sharing
+of ladders.
+
+
+License
+-------
+
+Copyright (c) 2012 Michael Conrad Tadpol Tilstra
+Licensed under the MIT License.
+
+
+
 [pcemu]:http://bellard.org/jslinux/
 [avrasm]:http://www.atmel.com/atmel/acrobat/doc0856.pdf 
+[Audioino]:http://www.hobby-roboter.de/forum/viewtopic.php?f=4&t=128&p=531
 
