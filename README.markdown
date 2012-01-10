@@ -4,7 +4,7 @@ Avrian Jump
 
 A very simple ladder language for programming ATMega168s from a web browser.
 
-This started out as a desire to be able to program an Arduino from an iOS device.  Since it
+This started out as a desire to be able to program an [Arduino][] from an iOS device.  Since it
 doesn't seem like compiler tools of any sort would get into the app store, I figured something
 would need to be done in HTML5.  And if a [PC emulator][psemu] could be written in javascript,
 so could something like this.
@@ -12,13 +12,14 @@ so could something like this.
 However, recreating the Arduino IDE in HTML seemed like too much work. So the project was
 reduced into something much simpler.  Mainly, a simple ladder language, and the Audioino
 bootloader.  That still left the need for an assembler, which while still a fair amount of
-work, seemed a lot more managable.
+work, seemed a lot more managable.  (and besides, it kind of sounded like fun to write an
+assembler in javascript.)
 
 The Ladder
 ----------
 
 Each rung on the ladder has a single test and multiple actions.  Tests can check the digital
-pins, analog pins, and a couple of variables.  Each action and set a digital pin, a PWM output,
+pins, analog pins, and a couple of variables.  Each action can set a digital pin, a PWM output,
 or a variable.  Analog, PWM, and variables are 16bit values.
 
 There is no 'setup()'.  Analog pins are always analog inputs.  When specified in a test, a
@@ -67,7 +68,7 @@ Copyright (c) 2012 Michael Conrad Tadpol Tilstra
 Licensed under the MIT License.
 
 
-
+[Arduino]:http://www.arduino.cc/
 [pcemu]:http://bellard.org/jslinux/
 [avrasm]:http://www.atmel.com/atmel/acrobat/doc0856.pdf 
 [Audioino]:http://www.hobby-roboter.de/forum/viewtopic.php?f=4&t=128&p=531
