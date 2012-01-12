@@ -85,7 +85,7 @@ function toSrecord() {
 function toAudioino() {
 	var a = ladderToASCII();
 	a = ASCIItoASM(a);
-	a = tadAvrAsm.assemble(a, {'outMode': 'audioino'});
+	a = tadAvrAsm.assemble(a, {'outmode': 'audioino'});
 
 	if( 'errors' in a) {
 		open("data:text/plain;base64," + escape(btoa(a.errors.join("\n"))));
