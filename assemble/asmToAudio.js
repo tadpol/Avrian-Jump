@@ -182,7 +182,7 @@
 		var chunk2 = [
 			"data", // Sub-chunk identifier
 			packLE32(signal.length * channels * bitsPerSample / 8), // Chunk length
-			data
+			data.join('')
 		].join('');
 		
 		// Header
@@ -234,6 +234,14 @@
 		var dataURI = "data:audio/wav;base64," + escape(btoa(wave));
 		var audio = new Audio(dataURI);
 		audio.play();
+	}
+
+	/**
+	 * Convert wave to base64 and twist into an URI, then open.
+	 */
+	tadAvrAsm.openWaveData = function(wave) {
+		var dataURI = "data:audio/wav;base64," + escape(btoa(wave));
+		open(dataURI);
 	}
 
 }( window.tadAvrAsm = window.tadAvrAsm || {} ));
