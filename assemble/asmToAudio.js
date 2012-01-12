@@ -28,7 +28,6 @@
 	/**
 	 * Converts an array of program data into a manchester encoded signal array.
 	 */
-
 	function numsToSignal(hexes) {
 		/* The format that the Audioino boot loader expects seems to be as follows:
 		 * The wave data is broken into frames.
