@@ -31,10 +31,10 @@ to be able to tweet ladders.  You can view the ascii format, and also load ladde
 The ascii parser skips anything it doesn't recognise; it is a bit too forgiving at times.
 
 An example program:
-    #Blink LED
+    #Fast Blink LED
     :T;A+=1
-    :A=45;D0=1
-    :A=90;D0=0,A=0
+    :A=16383;D13=1
+    :A=32767;D13=0,A=0
 
 A ladder can also be turned into 8bit AVR assembly.
 
