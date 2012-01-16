@@ -9,11 +9,12 @@ doesn't seem like compiler tools of any sort would get into the app store, I fig
 would need to be done in HTML5.  And if a [PC emulator][psemu] could be written in javascript,
 so could something like this.
 
-However, recreating the Arduino IDE in HTML seemed like too much work. So the project was
-reduced into something much simpler.  Mainly, a simple ladder language, and the Audioino
-bootloader.  That still left the need for an assembler, which while still a fair amount of
-work, seemed a lot more managable.  (and besides, it kind of sounded like fun to write an
-assembler in javascript.)
+However, recreating the Arduino IDE in HTML seemed like too much work, at least for a first
+try.  So I reduced the project into something much simpler, while still putting real machine
+code into the AVR's flash.  A simple ladder language that compiled into AVR assembly, which
+would be assembled into machine code, seemed like like a resonable reduction.  With that I
+could take advantage of the [Audioino][] bootloader, to load right from the web page.
+
 
 The Ladder
 ----------
@@ -24,19 +25,25 @@ or a variable.  Analog, PWM, and variables are 16bit values.
 
 There is no 'setup()'.  Analog pins are always analog inputs.  When specified in a test, a
 digital pin is set to an input then read.  When specified in an action, it is set to an output
-then set.  ??? how does this interact with PWM ???
+then set.
+
+PWM code is still non-existant, so how this will actually work is up in the air.  How I want it
+to work is:  Specifying a pin in an action as a PWM output makes it a PWM output.  Specifying a
+pin in a test stops it from doing PWM output.  Specifying a digital state for the pin in an
+action also stops it from doing PWM output.
 
 There is an ascii format of the ladders.  This was done because it seemed like it could be neat
 to be able to tweet ladders.  You can view the ascii format, and also load ladders from it.
 The ascii parser skips anything it doesn't recognise; it is a bit too forgiving at times.
 
 An example program:
-    #Fast Blink LED
-    :T;A+=1
-    :A=16383;D13=1
-    :A=32767;D13=0,A=0
 
-A ladder can also be turned into 8bit AVR assembly.
+	#Fast Blink LED
+	:T;A+=1
+	:A=16383;D13=1
+	:A=32767;D13=0,A=0
+
+Mostly though, a ladder is converted into AVR assembly.
 
 The Assembler
 -------------
@@ -55,6 +62,8 @@ them.
 Outputs
 -------
 
+
+
 A ladder can be turned into an ASCII form, assembler, a S19 file and an played as a WAV.  The
 WAV file is formatted to be something the [Audioino][] bootloader recognises.  The S19 can be
 feed into avrdude.  The assembly is mostly for debugging.  The ASCII format is for easy sharing
@@ -65,6 +74,7 @@ License
 -------
 
 Copyright (c) 2012 Michael Conrad Tadpol Tilstra
+
 Licensed under the MIT License.
 
 
