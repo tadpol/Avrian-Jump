@@ -6,7 +6,7 @@ A very simple ladder language for programming ATMega168s from a web browser.
 
 This started out as a desire to be able to program an [Arduino][] from an iOS device.  Since it
 doesn't seem like compiler tools of any sort would get into the app store, I figured something
-would need to be done in HTML5.  And if a [PC emulator][psemu] could be written in javascript,
+would need to be done in HTML5.  And if a [PC emulator][pcemu] could be written in javascript,
 so could something like this.
 
 However, recreating the Arduino IDE in HTML seemed like too much work, at least for a first
@@ -56,18 +56,26 @@ memory to put the machine code, and can specify immeadiate words to save in the 
 
 This assembler doesn't know about the various AVR devices, and so will happily assemble any of
 the known mnemonics into the output.  Even if your target device has no idea what to do with
-them.
+them.  It has assembled blink tests for the ATmega168 and the ATTiny13, so it seems pretty
+flexable. (Avrian Jump currently only supports the ATmega168 though.)
 
 
 Outputs
 -------
 
+A ladder can be compiled into a few different formats:
 
-
-A ladder can be turned into an ASCII form, assembler, a S19 file and an played as a WAV.  The
-WAV file is formatted to be something the [Audioino][] bootloader recognises.  The S19 can be
-feed into avrdude.  The assembly is mostly for debugging.  The ASCII format is for easy sharing
-of ladders.
+- ASCII
+  - This the only form can can be converted back into a ladder.
+	- This is for sharing your ladder with others, or saving a ladder for later.
+- S19
+  - If you don't have an [Audioino][] bootloader, but still want to use a ladder.  A S19 can be
+		saved as a file, and loaded with [avrdude][].
+- WAV
+  - A [Audioino][] compatible wav file for loading the ladder onto an .
+- Assembler
+  - This is mostly around for debugging the ladder compiler.  It can be interesting to look at
+		too.
 
 
 License
@@ -80,6 +88,7 @@ Licensed under the MIT License.
 
 [Arduino]:http://www.arduino.cc/
 [pcemu]:http://bellard.org/jslinux/
-[avrasm]:http://www.atmel.com/atmel/acrobat/doc0856.pdf 
+[avrasm]:http://www.atmel.com/atmel/acrobat/doc0856.pdf
+[avrdude]:http://ladyada.net/learn/avr/avrdude.html
 [Audioino]:http://www.hobby-roboter.de/forum/viewtopic.php?f=4&t=128&p=531
 
