@@ -1,0 +1,299 @@
+<html manifest="avrianjump.manifest">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1"> 
+		<link rel="apple-touch-icon" href="avrianjump.png" />
+		<!-- <link rel="apple-touch-startup-image" href="/startup.png"> -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<script type="text/javascript" language="JavaScript" src="jquery-1.7.1.js"></script>
+		<script type="text/javascript" language="JavaScript" src="avrianjump.js"></script>
+		<script type="text/javascript" language="JavaScript" src="assemble/avrasm.js"></script>
+		<script type="text/javascript" language="JavaScript" src="assemble/asmToAudio.js"></script>
+		<style>
+			.ladder, .tools {
+			}
+
+			.tools table {
+				padding-top: 1em;
+				width: 100%;
+			}
+
+			.tools table tr td:nth-child(even) {
+				text-align: right;
+			}
+
+			.rung {
+				border: solid thin black;
+				padding: 2px;
+			}
+
+			.rung a:nth-child(2) {
+				float: right;
+			}
+
+			.button {
+			}
+
+			.button2 {
+				padding: 2px;
+				border: solid thin black;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+			}
+
+			.test {
+				text-align: left;
+				display: inline-block;
+			}
+
+			.action {
+				text-align: right;
+			}
+
+			.action a {
+				margin-left: 0.75em;
+			}
+
+			textarea#rawViewPort {
+				width: 100%;
+				margin-bottom: 0.5em;
+			}
+
+			#rungtemplate {
+				visibility: hidden;
+				display: none;
+			}
+			#ASMHeader {
+				visibility: hidden;
+				display: none;
+			}
+		</style>
+		<title>Avrian Jump</title>
+	</head>
+	<body>
+
+		<div class="ladder">
+		</div>
+		<div class="tools">
+			<table><tr><td>
+				<a class="button" onclick="javascript:addRung()">⊕</a>
+			</td><td>
+				<a class="button button2" onclick="javascript:rawViewOpen()">ASCII</a>
+				<a class="button button2" onclick="javascript:toASM()">ASM</a>
+				<a class="button button2" onclick="javascript:toSrecord()">S19</a>
+				<a class="button button2" onclick="javascript:toAudioino()">➜</a>
+			</td></tr></table>
+		</div>
+
+		<div class="rawView">
+			<textarea id="rawViewPort"></textarea><br />
+			<a class="button button2" onclick="javascript:rawViewClose()">close</a>
+			<a class="button button2" onclick="javascript:rawViewLoad()">load</a>
+		</div>
+
+
+		<div id="rungtemplate">
+			<div class="rung">
+				<a class="button">⊗</a>
+				<a class="button">⊕</a>
+			</div>
+			<div class="test">
+				if <select name="inputs">
+					<!-- True; always do this rung. -->
+					<option show="none">T</option>
+					<!-- digital pins -->
+					<option show="digital">D0</option>
+					<option show="digital">D1</option>
+					<option show="digital">D3</option>
+					<option show="digital">D4</option>
+					<option show="digital">D5</option>
+					<option show="digital">D6</option>
+					<option show="digital">D7</option>
+					<option show="digital">D8</option>
+					<option show="digital">D9</option>
+					<option show="digital">D10</option>
+					<option show="digital">D11</option>
+					<option show="digital">D12</option>
+					<option show="digital">D13</option>
+					<!-- analog pins -->
+					<option show="analog">A0</option>
+					<option show="analog">A1</option>
+					<option show="analog">A2</option>
+					<option show="analog">A3</option>
+					<option show="analog">A4</option>
+					<option show="analog">A5</option>
+					<option show="analog">A6</option>
+					<option show="analog">A7</option>
+					<!-- Variables -->
+					<option show="analog">A</option>
+					<option show="analog">B</option>
+					<option show="analog">C</option>
+					<option show="analog">D</option>
+					<option show="analog">E</option>
+				</select>
+				<select name="test">
+					<option is="digital">=1</option>
+					<option is="digital">=0</option>
+					<option is="analog">=</option>
+					<option is="analog">&lt;</option>
+					<option is="analog">&gt;</option>
+					<option is="analog">!</option>
+				</select>
+				<input type="text" size=2 />
+			</div>
+			<div class="action">
+				<select name="outputs">
+					<!-- digital pins -->
+					<option show="digital">D0</option>
+					<option show="digital">D1</option>
+					<option show="digital">D3</option>
+					<option show="digital">D4</option>
+					<option show="digital">D5</option>
+					<option show="digital">D6</option>
+					<option show="digital">D7</option>
+					<option show="digital">D8</option>
+					<option show="digital">D9</option>
+					<option show="digital">D10</option>
+					<option show="digital">D11</option>
+					<option show="digital">D12</option>
+					<option show="digital">D13</option>
+					<!-- PWM pins -->
+					<option show="analog">P3</option>
+					<option show="analog">P5</option>
+					<option show="analog">P6</option>
+					<option show="analog">P9</option>
+					<option show="analog">P10</option>
+					<option show="analog">P11</option>
+					<!-- Variables -->
+					<option show="analog">A</option>
+					<option show="analog">B</option>
+					<option show="analog">C</option>
+					<option show="analog">D</option>
+					<option show="analog">E</option>
+				</select>
+				<select name="act">
+					<option is="digital">=1</option>
+					<option is="digital">=0</option>
+					<option is="analog">=</option>
+					<option is="analog">+=</option>
+					<option is="analog">-=</option>
+				</select>
+				<input type="text" size=2 />
+				<a class="button">⊗</a>
+			</div>
+		</div>
+
+		<!-- The default assmebly that every program needs.  -->
+		<pre id="ASMHeader">
+; Replace common IO register names with numbers for a ATmega168
+	_replace PINB, 0x03
+	_replace DDRB, 0x04
+	_replace PORTB, 0x05
+	_replace PINC, 0x06
+	_replace DDRC, 0x07
+	_replace PORTC, 0x08
+	_replace PIND, 0x09
+	_replace DDRD, 0x0a
+	_replace PORTD, 0x0b
+
+	_replace ADCL, 0x78
+	_replace ADCH, 0x79
+	_replace ADCSRA, 0x7a
+	_replace ADCSRB, 0x7b
+	_replace ADMUX, 0x7c
+	_replace DIDR0, 0x7e
+
+	_replace SPH, 0x3e
+	_replace SPL, 0x3d
+	_replace RAMEND_HI, 0x04
+	_replace RAMEND_LO, 0xff
+
+; Rest and Interrupt table for ATmega168
+	_loc 0
+	jmp RESET		; Reset Handler
+	jmp IgnoreINT		; IRQ0 Handler
+	jmp IgnoreINT		; IRQ1 Handler
+	jmp IgnoreINT		; PCINT0 Handler
+	jmp IgnoreINT		; PCINT1 Handler
+	jmp IgnoreINT		; PCINT2 Handler
+	jmp IgnoreINT		; Watchdog Timer
+	jmp IgnoreINT		; Timer2 Compare
+	jmp IgnoreINT		; Timer2 Compare
+	jmp IgnoreINT		; Timer2 Overflow Handler
+	jmp IgnoreINT		; Timer1 Capture Handler
+	jmp IgnoreINT		; Timer1 Compare A Handler
+	jmp IgnoreINT		; Timer1 Compare B Handler
+	jmp IgnoreINT		; Timer1 Overflow Handler
+	jmp IgnoreINT		; Timer0 Compare A Handler
+	jmp IgnoreINT		; Timer0 Compare B Handler
+	jmp IgnoreINT		; Timer0 Overflow Handler
+	jmp IgnoreINT		; SPI Transfer Complete Handler
+	jmp IgnoreINT		; USART, RX Complete Handler
+	jmp IgnoreINT		; USART, UDR Empty Handler
+	jmp IgnoreINT		; USART, TX Complete Handler
+	jmp IgnoreINT		; ADC Conversion Complete Handler
+	jmp IgnoreINT		; EEPROM Ready Handler
+	jmp IgnoreINT		; Analog Comparator Handler
+	jmp IgnoreINT		; 2-wire Serial Interface Handler
+	jmp IgnoreINT		; Store Program Memory Ready Handler
+
+IgnoreINT:	reti
+
+RESET:	ldi   r16, RAMEND_HI	; Main program start
+	out   SPH, r16		;Set Stack Pointer to top of RAM
+	ldi   r16, RAMEND_LO
+	out   SPL, r16
+	cli			; No interrupts
+	ldi   r16, 0x7e		; Turn off digital inputs on analog pins.
+	sts   DIDR0, r16
+
+	clr   r0		; 'A' All vars initialize to 0
+	clr   r1
+	clr   r2		; 'B'
+	clr   r3
+	clr   r4		; 'C'
+	clr   r5
+	clr   r6		; 'D'
+	clr   r7
+	clr   r8		; 'E'
+	clr   r9
+
+	jmp   LADDER		; Start climbing the ladder.
+
+	; Read the ADC for a pin.
+	; Desired source is in R16
+getAnalog:
+	; Setup ADC
+	andi  r16, 7	; Which input to sample
+	; Use Internal reference, right aligned
+	ori   r16, 0xc0
+	sts   ADMUX, r16
+	ldi   r16, 0xc7 ; ADC Enable, ADC Start, No interrupt, /128
+	sts   ADCSRA, r16
+	; wait...
+getAnalog_waitforit:
+	lds   r16, ADCSRA
+	sbrs  r16, 4	; If complete, stop waiting.
+	rjmp  getAnalog_waitforit
+	; Put result into r16:17
+	lds   r16, ADCL
+	lds   r17, ADCH
+	ret
+
+	; Set the PWM output on a pin.
+	; R16:R17 is the value
+	; R18 is which output
+setPWM:
+	; TODO how to do this?
+	ret
+		</pre>
+	</body>
+</html>
+
+<!--
+ #Blink LED on D0
+ :T;A+=1
+ :A=45;D0=1
+ :A=90;D0=0,A=0
+-->
