@@ -74,7 +74,8 @@ A ladder can be compiled into a few different formats:
   - If you don't have an [Audioino][] bootloader, but still want to use a ladder.  A S19 can be
 		saved as a file, and loaded with [avrdude][].
 - WAV
-  - A [Audioino][] compatible wav file for loading the ladder onto an .
+  - A [Audioino][] compatible wav file for loading the ladder onto an ATmega168 with the
+		[Audioino][] bootloader installed.
 - Assembler
   - This is mostly around for debugging the ladder compiler.  It can be interesting to look at
 		too.
