@@ -15,6 +15,7 @@ code into the AVR's flash.  A simple ladder language that compiled into AVR asse
 would be assembled into machine code, seemed like like a resonable reduction.  With that I
 could take advantage of the [Audioino][] bootloader, to load right from the web page.
 
+This is still unfinished, go see the TODO file.
 
 The Ladder
 ----------
@@ -57,7 +58,8 @@ memory to put the machine code, and can specify immeadiate words to save in the 
 This assembler doesn't know about the various AVR devices, and so will happily assemble any of
 the known mnemonics into the output.  Even if your target device has no idea what to do with
 them.  It has assembled blink tests for the ATmega168 and the ATTiny13, so it seems pretty
-flexable. (Avrian Jump currently only supports the ATmega168 though.)
+flexable. (Avrian Jump currently only supports the ATmega168 though.  Maybe add others in the
+future, but would have to figure the bootloader thing out first.)
 
 
 Outputs
