@@ -17,6 +17,8 @@ could take advantage of the [Audioino][] bootloader, to load right from the web 
 
 This is still unfinished, go see the TODO file.
 
+Try it out! [Avrian Jump](http://tadpol.github.com/Avrian-Jump/avrianjump.html)
+
 The Ladder
 ----------
 
