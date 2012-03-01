@@ -17,6 +17,10 @@ could take advantage of the [Audioino][] bootloader, to load right from the web 
 
 This is still unfinished, go see the TODO file.
 
+After using the UI for a bit, I found that while functional, it sucks.  There are too many
+places to tap to do the simplest things.  So I want to redesign it.  Which until I can think of
+a new design, has put this project on hold.
+
 Try it out! [Avrian Jump](http://tadpol.github.com/Avrian-Jump/avrianjump.html)
 
 The Ladder
