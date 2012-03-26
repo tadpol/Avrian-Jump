@@ -46,8 +46,6 @@ function rawViewOpen() {
 	$(".ladder, .tools").hide();
 	$(".rawView").show();
 	$("#rawViewPort").val(ladderToASCII());
-	var cnt = $(".ladder .rung").length;
-	$("#rawViewPort").attr('rows', cnt+1);
 }
 
 function rawViewClose() {
@@ -394,12 +392,13 @@ function ASCIItoASM(ascii) {
 		}
 		if( d[0].match(/^[A-E]$/) ) {
 			// test variable.
-			result.push("\tmovw r" + varLoc[d[0]] + ", r16");
+			result.push("\tmovw r16, r" + varLoc[d[0]]);
 			result.push("\tsubi r16, " + lo(d[2]));
 			result.push("\tsbci r17, " + hi(d[2]));
 			result.push("\t" + Btst[d[1]] + " 1"); // jump over jump if true.
 			result.push("\trjmp endrung_" + ri);
 		}
+		result.push("\t; End Test");
 
 		/* r[1] is the actions. */
 		var actions = r[1].split(',');
@@ -443,8 +442,9 @@ function ASCIItoASM(ascii) {
 						throw "Bad action";
 				}
 				/* Save results */
-				result.push("\tmovw r16, r" + varLoc[d[0]]);
+				result.push("\tmovw r" + varLoc[d[0]] + ", r16");
 			}
+			result.push("\t; End Action");
 		}
 
 		result.push("endrung_" + ri + ":");
