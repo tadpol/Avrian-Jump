@@ -398,6 +398,7 @@ function ASCIItoASM(ascii) {
 			result.push("\t" + Btst[d[1]] + " 1"); // jump over jump if true.
 			result.push("\trjmp endrung_" + ri);
 		}
+		result.push("\t; End Test");
 
 		/* r[1] is the actions. */
 		var actions = r[1].split(',');
@@ -443,6 +444,7 @@ function ASCIItoASM(ascii) {
 				/* Save results */
 				result.push("\tmovw r16, r" + varLoc[d[0]]);
 			}
+			result.push("\t; End Action");
 		}
 
 		result.push("endrung_" + ri + ":");
