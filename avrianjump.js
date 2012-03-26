@@ -392,7 +392,7 @@ function ASCIItoASM(ascii) {
 		}
 		if( d[0].match(/^[A-E]$/) ) {
 			// test variable.
-			result.push("\tmovw r" + varLoc[d[0]] + ", r16");
+			result.push("\tmovw r16, r" + varLoc[d[0]]);
 			result.push("\tsubi r16, " + lo(d[2]));
 			result.push("\tsbci r17, " + hi(d[2]));
 			result.push("\t" + Btst[d[1]] + " 1"); // jump over jump if true.
@@ -442,7 +442,7 @@ function ASCIItoASM(ascii) {
 						throw "Bad action";
 				}
 				/* Save results */
-				result.push("\tmovw r16, r" + varLoc[d[0]]);
+				result.push("\tmovw r" + varLoc[d[0]] + ", r16");
 			}
 			result.push("\t; End Action");
 		}
