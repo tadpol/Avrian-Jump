@@ -46,8 +46,6 @@ function rawViewOpen() {
 	$(".ladder, .tools").hide();
 	$(".rawView").show();
 	$("#rawViewPort").val(ladderToASCII());
-	var cnt = $(".ladder .rung").length;
-	$("#rawViewPort").attr('rows', cnt+1);
 }
 
 function rawViewClose() {
