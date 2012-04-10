@@ -17,6 +17,8 @@ could take advantage of the [Audioino][] bootloader, to load right from the web 
 
 This is still unfinished, go see the TODO file.
 
+Also go read issue #2, playing sounds encoded in data URIs in iOS 5.1 is broken. *sigh*
+
 Try it out! [Avrian Jump](http://tadpol.github.com/Avrian-Jump/avrianjump.html)
 
 The Ladder
