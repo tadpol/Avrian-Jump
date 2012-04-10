@@ -9,6 +9,7 @@
 		<script type="text/javascript" language="JavaScript" src="avrianjump.js"></script>
 		<script type="text/javascript" language="JavaScript" src="assemble/avrasm.js"></script>
 		<script type="text/javascript" language="JavaScript" src="assemble/asmToAudio.js"></script>
+		<script type="text/javascript" language="JavaScript" src="assemble/asmToBlinkit.js"></script>
 		<style>
 			.ladder, .tools {
 			}
@@ -83,6 +84,7 @@
 				<a class="button button2" onclick="javascript:rawViewOpen()">ASCII</a>
 				<a class="button button2" onclick="javascript:toASM()">ASM</a>
 				<a class="button button2" onclick="javascript:toSrecord()">S19</a>
+				<a class="button button2" onclick="javascript:toBlinkit()">BLINK</a>
 				<a class="button button2" onclick="javascript:toAudioino()">➜</a>
 			</td></tr></table>
 		</div>
@@ -184,6 +186,8 @@
 				<a class="button">⊗</a>
 			</div>
 		</div>
+
+<div id="blinkittest" style="width: 20px; height: 20px"></div>
 
 		<!-- The default assmebly that every program needs.  -->
 		<pre id="ASMHeader">

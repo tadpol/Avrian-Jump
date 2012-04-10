@@ -95,6 +95,18 @@ function toAudioino() {
 	}
 }
 
+function toBlinkit() {
+	var a = ladderToASCII();
+	a = ASCIItoASM(a);
+	a = tadAvrAsm.assemble(a, {'outmode': 'blinkit'});
+
+	if( 'errors' in a) {
+		open("data:text/plain;base64," + escape(btoa(a.errors.join("\n"))));
+	} else {
+		tadAvrAsm.doBlinks($('#blinkittest')[0], a.data, 2);
+	}
+}
+
 /***********************************************/
 /**
  * Append a new rung with the default actions.
