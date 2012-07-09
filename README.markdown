@@ -21,6 +21,12 @@ Also go read issue #2, playing sounds encoded in data URIs in iOS 5.1 is broken.
 
 Try it out! [Avrian Jump](http://tadpol.github.com/Avrian-Jump/avrianjump.html)
 
+
+Some other ways (likely better) of putting Arduino IDEs into web browsers:
+- [wifino](http://www.wifino.com/)
+- [codebender](http://codebender.cc/)
+
+
 The Ladder
 ----------
 
